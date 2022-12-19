@@ -1,6 +1,7 @@
 import { products } from "./products.mjs"
 
 const $products = document.querySelector("#products");
+const $cart = document.querySelector("#cart");
 
 const state = {
     cart: []
@@ -22,8 +23,25 @@ const renderProducts = () => {
     $products.innerHTML = html;
 }
 
-const init = () => {
-    renderProducts();
+const generateCartHTML = (cartItem) => {
+    return `
+   <div class="cart-item">
+   <span> ${cartItem.title} - x${cartItem.qnt} - ${cartItem.price * cartItem.qnt} 
+    </div>
+    `
+}
+const renderCartItems = () => {
+    const html = state.cart.map((cartItem) => {
+        return generateCartHTML(cartItem);
+    }).join("");
+    $cart.innerHTML = html;
 }
 
+const init = () => {
+    renderProducts();
+    renderCartItems();
+}
+
+
 init();
+
