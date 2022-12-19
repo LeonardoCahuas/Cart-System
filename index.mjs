@@ -37,9 +37,25 @@ const renderCartItems = () => {
     $cart.innerHTML = html;
 }
 
+
+const setEventListener = () => {
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("add-to-cart")) {
+            const productId = event.target.dataset.id
+            const product = products.find((product) => {
+                return product.id == productId
+            })
+            console.log(product);
+        }
+    })
+
+}
+
+
 const init = () => {
     renderProducts();
     renderCartItems();
+    setEventListener();
 }
 
 
